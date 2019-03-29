@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>交互英语教程</title>
+    <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <link rel="stylesheet" type="text/css" href="./css/fill.css">
+</head>
+<body>
+    <div class="box" ms-controller="fill">
+        <div class="box_head">
+            <span></span>
+            <p>交互英语教程3书-段落填空</p>
+            <b></b>
+        </div>
+
+        <div class="box_con">
+            <div class="box_con_b fill2">
+                <p>As a <input type="text" ms-change="fillChange()" />, it is important to know what to do with customer complaints. <input type="text" ms-change="fillChange()" />, the idea of "customer is the God" is correct. However, you should think about and study the complaint and do not <input type="text" ms-change="fillChange()" /> the wrong facts in a hurry.</p>
+                <p>Once you receive a customer complaint, you should firstly study what <input type="text" ms-change="fillChange()" /> the customer complains. Then you should make it clear what the customer really wants. Only in this way can you solve the problem <input type="text" ms-change="fillChange()" />.</p>
+            </div>
+            <div class="score">(5分)</div>
+
+            <div class="bg hide" ms-class="hide:!bgShow"></div>
+
+            <div class="accuracyPop hide" ms-class="hide:!accuracyPopShow">
+                <p class="accuracyPop_close" ms-click="accuracyPopClose()">×</p>
+                <div class="accuracyPop_con">您的正确率为: <span class="accuracyPop_con_num">83.00%</span></div>
+            </div>
+
+            <div style="height: 0.4rem"></div>
+        </div>
+
+        <div class="box_foot">
+            <p ms-click="tijiao()">提交</p>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/main.js"></script>
+
+<script>
+    /*rem设置设计稿为750*/
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+</script>
+
+<script>
+    require(['fill'], function (model) {
+        //input相关操作
+        var textWidth = function(text){
+            var sensor = $('<pre>'+ text +'</pre>').css({display: 'none'});
+            $('body').append(sensor);
+            var width = sensor.width();
+            sensor.remove();
+            return width;
+        };
+
+        //移动端监听输入框
+        $(".fill2").find("input").bind('input propertychange', function(){
+            $(this).width(textWidth($(this).val() + 10)); //input的宽度根据内容的宽度自适应
+        });
+
+        avalon.scan();
+    });
+</script>
+</html>
+

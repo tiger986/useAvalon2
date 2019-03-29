@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>交互英语教程</title>
+    <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <link rel="stylesheet" type="text/css" href="./css/choose.css">
+</head>
+<body>
+    <div class="box" ms-controller="choose">
+        <div class="box_head">
+            <span></span>
+            <p>交互英语教程1书-句型单选</p>
+            <b></b>
+        </div>
+
+        <div class="box_con">
+            <div class="box_con_c  question1" ms-repeat="testCon1">
+                <div class="box_con_c_title">
+                    <i ms-html="($index+1)+'.'"></i>
+                    <span ms-html="el.type"></span>
+                    <p ms-html="el.title"> 1. Could you send this postcard for me?</p>
+                    <b ms-html="el.fen"></b>
+                </div>
+                <div class="box_con_c_ans">
+                    <div class="box_con_c_ans_a_con">
+                        <input type="radio" ms-attr-name="'unit1'+$index" ms-change="checkAns()" />
+                        <p ms-class="A:el.correct=='A'" ms-html="el.ans1">A. Sorry, I don't know. </p>
+                    </div>
+                    <div class="box_con_c_ans_a_con">
+                        <input type="radio" ms-attr-name="'unit1'+$index" ms-change="checkAns()" />
+                        <p ms-class="B:el.correct=='B'" ms-html="el.ans2">B. With pleasure.</p>
+                    </div>
+                    <div class="box_con_c_ans_a_con">
+                        <input type="radio" ms-attr-name="'unit1'+$index" ms-change="checkAns()" />
+                        <p ms-class="C:el.correct=='C'" ms-html="el.ans3">C. No,I can't.</p>
+                    </div>
+                    <div class="box_con_c_ans_a_con">
+                        <input type="radio" ms-attr-name="'unit1'+$index" ms-change="checkAns()" />
+                        <p ms-class="D:el.correct=='D'" ms-html="el.ans4">D. That's great!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg hide" ms-class="hide:!bgShow"></div>
+
+            <div class="accuracyPop hide" ms-class="hide:!accuracyPopShow">
+                <p class="accuracyPop_close" ms-click="accuracyPopClose()">×</p>
+                <div class="accuracyPop_con">您的正确率为: <span class="accuracyPop_con_num">83.00%</span></div>
+            </div>
+
+            <div style="height: 0.4rem"></div>
+        </div>
+
+        <div class="box_foot">
+            <p ms-click="tijiao()">提交</p>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/main.js"></script>
+
+<script>
+    /*rem设置设计稿为750*/
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
+</script>
+
+<script>
+    require(['choose'], function (model) {
+
+
+        avalon.scan();
+    });
+</script>
+</html>
+
